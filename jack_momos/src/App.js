@@ -1,6 +1,17 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [inputUp, setInputUp] = useState("");
+  const [inputBottom, setInputBottom] = useState("");
+
+  const changeInputUp = (event) => {
+    setInputUp(event.target.value);
+  };
+  const changeInputBottom = (event) => {
+    setInputBottom(event.target.value);
+  };
+
   return (
     <div className="App">
       {/* Select mood picker */}
@@ -14,13 +25,28 @@ function App() {
       <br />
 
       {/* input text up/bottom */}
-      <input type="text" placeholder="Put some text..."></input>
+      <input
+        onChange={changeInputUp}
+        type="text"
+        placeholder="Put some text..."
+      ></input>
       <br />
-      <input type="text" placeholder="Put some text..."></input>
+      <input
+        onChange={changeInputBottom}
+        type="text"
+        placeholder="Put some text..."
+      ></input>
       <br />
 
       {/* export button to (.jpg, .png) */}
       <button>Export</button>
+
+      {/* text */}
+      <div>
+        <span>{inputUp}</span>
+        <br />
+        <span>{inputBottom}</span>
+      </div>
     </div>
   );
 }
