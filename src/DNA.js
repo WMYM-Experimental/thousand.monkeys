@@ -16,6 +16,8 @@ class DNA {
         }
         this.fitness = fit / target.length;
     }
+
+    crossover(parent) {}
 }
 
 export default DNA;

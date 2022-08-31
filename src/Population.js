@@ -37,6 +37,8 @@ class Population {
             }
         });
     }
+
+    createPopulation()
 }
 
 export default Population;
