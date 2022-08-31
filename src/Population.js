@@ -38,7 +38,9 @@ class Population {
         });
     }
 
-    createPopulation()
+    createPopulation() {}
+
+    evaluate() {}
 }
 
 export default Population;
