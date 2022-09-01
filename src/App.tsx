@@ -1,8 +1,8 @@
+import {Wrapper} from './wrapper/Wrapper';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <Wrapper/>
     </div>
   );
 }
