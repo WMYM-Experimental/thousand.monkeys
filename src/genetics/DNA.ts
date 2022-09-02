@@ -25,6 +25,10 @@ class DNA {
         this.genes[index] = gene;
     }
 
+    public getFitness(): number {
+        return this.fitness;
+    }
+
     // calc methods
     public calcFitness(target: string): void {
         let fitness = 0;
