@@ -9,8 +9,6 @@ export const Wrapper = () => {
                     <input type="text" name="text" id="text" />
                     <input type="button" value="Try" />
                 </div>
-                <Slider type="range" name="mutation" idName="population" />
-                <Slider type="range" name="population" idName="population" />
             </div>
         </>
     );
