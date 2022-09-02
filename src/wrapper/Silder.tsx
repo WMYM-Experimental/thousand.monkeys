@@ -1,4 +1,4 @@
-export const LittleWrapper = (type: string, name: string, idName: string) => {
+export const Slider = (type: string, name: string, idName: string) => {
     return (
         <>
             <label htmlFor={idName}>{type}</label>
