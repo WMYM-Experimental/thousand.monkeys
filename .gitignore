@@ -25,8 +25,8 @@ yarn-error.log*
 # ignore package-lock.json
 package-lock.json
 
-#ignore package.json
+# ignore package.json
 package.json
 
-#ignore tsconfig.json
+# ignore tsconfig.json
 tsconfig.json

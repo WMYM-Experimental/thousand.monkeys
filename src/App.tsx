@@ -1,10 +1,7 @@
-import {Wrapper} from './wrapper/Wrapper';
+import "./App.css";
+
 function App() {
-  return (
-    <div className="App">
-      <Wrapper/>
-    </div>
-  );
+    return <div className="App"></div>;
 }
 
 export default App;
