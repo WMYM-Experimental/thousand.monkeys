@@ -1,4 +1,3 @@
-import "./App.css";
 import { Wrapper } from "./components/wrapper/Wrapper";
 import { Info } from "./components/info/Info";
 import { Show } from "./components/show/Show";

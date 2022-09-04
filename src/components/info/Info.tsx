@@ -1,4 +1,5 @@
-import React from "react";
+// import info css file
+import './Info.css';
 
 export const Info = () => {
     return (
