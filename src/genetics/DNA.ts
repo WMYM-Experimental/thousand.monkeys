@@ -42,7 +42,7 @@ class DNA {
 
     public crossover(partner: DNA): DNA {
         const child = new DNA(this.genes.length);
-        const middle = getRandInt(0, this.genes.length);
+        const middle = getRandInt(0, this.genes.length - 1);
         for (let i = 0; i < this.genes.length; i++) {
             if (i > middle) {
                 child.setGene(i, this.genes[i]);

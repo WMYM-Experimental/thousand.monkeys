@@ -1,5 +1,5 @@
 import { DNA } from "./DNA";
-import { getRandInt, getChar } from "./utils";
+import { getRandInt } from "./utils";
 
 class Population {
     target: string;
@@ -39,8 +39,8 @@ class Population {
         this.avergeFitness = 0;
         this.worstFitness = 0;
 
-        for (let i = 0; i < this.treshold; i++) {
-            this.population[i] = new DNA(this.target.length);
+        for (let i = 0; i < this.pupulationSize; i++) {
+            this.population.push(new DNA(this.target.length));
         }
     }
 
@@ -62,8 +62,10 @@ class Population {
 
     public generate(): void {
         this.population.forEach((dna, index) => {
-            const parentA = this.darwin[getRandInt(0, this.darwin.length - 1)];
-            const parentB = this.darwin[getRandInt(0, this.darwin.length - 1)];
+            const a = getRandInt(0, this.population.length - 1);
+            const parentA = this.population[a];
+            const b = getRandInt(0, this.population.length - 1);
+            const parentB = this.population[b];
             const child = parentA.crossover(parentB);
             child.mutate(this.mutationRate);
             this.population[index] = child;
@@ -108,12 +110,20 @@ class Population {
         return this.worstFitness;
     }
 
-    public isFinished(): boolean {
-        return this.finished;
-    }
-
-    public getGenerations(): number {
-        return this.generations;
+    public evaluate(): void {
+        let worldRecord = 0;
+        let index = 0;
+        this.population.forEach((dna, i) => {
+            if (dna.getFitness() > worldRecord) {
+                index = i;
+                worldRecord = dna.getFitness();
+            }
+        });
+        if (worldRecord === this.perfectScore) {
+            this.finished = true;
+        }
+        this.bestFitness = worldRecord;
+        this.best = this.population[index].getGenes().join("");
     }
 }
 
