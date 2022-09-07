@@ -20,6 +20,8 @@ const main = () => {
         population.evaluate();
         console.log(population.best);
     }
+
+    console.log(population.best);
 };
 
 export { main };
