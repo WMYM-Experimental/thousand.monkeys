@@ -2,6 +2,8 @@
 -- Utils --
 */
 const getRandInt = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
@@ -187,53 +189,69 @@ class Population {
 }
 
 
-// Cadena objetivo que se desea encontrar
-const target = "Washington Yandun";
+const main = (_target, _populationSize, _mutationRate) => {
+    // Arreglo que almacena los datos de cada generación
+    let show = "";
 
-// Parámetros de configuración del algoritmo genético
-const mutationRate = 0.01; // Tasa de mutación
-const populationSize = 200; // Tamaño de la población
-const threshold = 1; // Umbral de puntaje perfecto
+    // Cadena objetivo que se desea encontrar
+    const target = _target;
 
-// Crear una nueva población
-const population = new Population(target, mutationRate, populationSize, threshold);
+    // Parámetros de configuración del algoritmo genético
+    const mutationRate = _mutationRate; // Tasa de mutación
+    const populationSize = _populationSize; // Tamaño de la población
+    const threshold = 1; // Umbral de puntaje perfecto
 
-// Ejecutar el algoritmo hasta encontrar la cadena objetivo o alcanzar un número máximo de generaciones
-while (!population.finished) {
-    // Calcular el puntaje de aptitud de cada individuo en la población
-    population.calculateFitness();
+    // Crear una nueva población
+    const population = new Population(target, mutationRate, populationSize, threshold);
 
-    // Seleccionar los individuos más aptos para la reproducción
-    population.naturalSelection();
+    // Ejecutar el algoritmo hasta encontrar la cadena objetivo o alcanzar un número máximo de generaciones
+    while (!population.finished) {
+        // Calcular el puntaje de aptitud de cada individuo en la población
+        population.calculateFitness();
 
-    // Generar una nueva generación a partir de la reproducción y mutación de los individuos seleccionados
-    population.generate();
+        // Seleccionar los individuos más aptos para la reproducción
+        population.naturalSelection();
 
-    // Calcular el puntaje de aptitud después de generar una nueva generación
-    population.calculateFitness();
+        // Generar una nueva generación a partir de la reproducción y mutación de los individuos seleccionados
+        population.generate();
 
-    // Obtener y mostrar información sobre la generación actual
-    const generation = population.generations;
-    const bestFitness = population.bestFitness;
-    const averageFitness = population.getAverageFitness();
-    const worstFitness = population.getWorstFitness();
-    const bestPhrase = population.getBest();
+        // Calcular el puntaje de aptitud después de generar una nueva generación
+        population.calculateFitness();
 
-    console.log(`Generation: ${generation}`);
-    console.log(`Best Fitness: ${bestFitness}`);
-    console.log(`Average Fitness: ${averageFitness}`);
-    console.log(`Worst Fitness: ${worstFitness}`);
-    console.log(`Best Phrase: ${bestPhrase}`);
-    console.log("------------------------");
+        // Obtener y mostrar información sobre la generación actual
+        const generation = population.generations;
+        const bestFitness = population.bestFitness;
+        const averageFitness = population.getAverageFitness();
+        const worstFitness = population.getWorstFitness();
+        const bestPhrase = population.getBest();
 
-    // Evaluar si se ha encontrado la cadena objetivo
-    if (bestPhrase === target) {
-        population.finished = true; // Establecer la propiedad "finished" en true
+        show = `Generation: ${generation}\nBest Fitness: ${bestFitness}\nAverage Fitness: ${averageFitness}\nWorst Fitness: ${worstFitness}\nBest Phrase: ${bestPhrase}\n------------------------`;
+
+        // Evaluar si se ha encontrado la cadena objetivo
+        if (bestPhrase === target) {
+            population.finished = true; // Establecer la propiedad "finished" en true
+        }
     }
+
+
+    // El algoritmo ha finalizado y se ha encontrado la cadena objetivo
+    console.log("Algorithm finished!");
+    console.log(`Target phrase found: ${population.best}`);
+    console.log(`Total generations: ${population.generations}`);
+
+    return show;
 }
 
+document.getElementById("start-button").addEventListener("click", function () {
+    let targetElement = document.getElementById("target-input");
+    let populationSizeElement = document.getElementById("population-size-input");
+    let mutationRateElement = document.getElementById("mutation-rate-input");
 
-// El algoritmo ha finalizado y se ha encontrado la cadena objetivo
-console.log("Algorithm finished!");
-console.log(`Target phrase found: ${population.best}`);
-console.log(`Total generations: ${population.generations}`);
+    let target = targetElement ? targetElement.value : "Washington Yandun";
+    let populationSize = populationSizeElement ? parseInt(populationSizeElement.value) : 10;
+    let mutationRate = mutationRateElement / 100 ? parseFloat(mutationRateElement.value) : 0.01;
+
+    let data = main(target, populationSize, mutationRate)
+    const outputDiv = document.getElementById("output");
+    outputDiv.innerHTML = data
+});
