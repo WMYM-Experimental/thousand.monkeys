@@ -1,9 +1,9 @@
 # thousand.monkeys
 
-Classical Genetic algorithm implemented in TypeScript with a UI made in React.
+Classical Genetic algorithm implemented in JavaScript with a simple UI to show results.
 
 ## Tech Stack
 
--   TypeScript
+-   JavaScript
 -   React
 -   CSS
